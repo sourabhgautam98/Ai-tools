@@ -1,0 +1,21 @@
+.ColorBackground {
+  
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+.customBtn {
+  transition: all 0.5s ease;
+}
+
+.customBtn:hover {
+  background-color: #252525;
+  transform: scale(1.05);
+}
+.formControl {
+  flex: 1; 
+}

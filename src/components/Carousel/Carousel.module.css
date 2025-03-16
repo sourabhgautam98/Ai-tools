@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Montserrat:wght@300&display=swap');
+
+.carousel {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+.carouselImage {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+}
+
+
+.carouselInner {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease;
+  pointer-events: none;
+}
+
+.carouselItem {
+  flex: 0 0 100%;
+  height: 100%;
+  position: relative;
+  pointer-events: none;
+}
+
+.carouselItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  width: 80%;
+  max-width: 800px;
+}
+
+.headline {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.subheadline {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  font-weight: 400;
+  max-width: 800px;
+}
+
+.actionButton {
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  background-color: #000000;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  text-transform: uppercase;
+  font-weight: 600;
+ 
+}
+
+.actionButton:hover {
+  background-color: #182837;
+  transform: scaleX(1);
+}
+
+.prevButton,
+.nextButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.prevButton {
+  left: 20px;
+}
+
+.nextButton {
+  right: 20px;
+}
+
+@media (max-width: 768px) {
+  .headline {
+    font-size: 2.5rem;
+  }
+  
+  .subheadline {
+    font-size: 1rem;
+  }
+  
+  .actionButton {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+}
+
+/* Navigation Arrows */
+.swiper-button-next,
+.swiper-button-prev {
+  color: white; /* Arrow color */
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  padding: 20px; /* Padding for better click area */
+  border-radius: 50%; /* Circular buttons */
+  width: 50px; /* Fixed width */
+  height: 50px; /* Fixed height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease; /* Smooth hover effect */
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: rgba(0, 0, 0, 0.8); /* Darker background on hover */
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 24px; /* Arrow size */
+  font-weight: bold; /* Make arrows bolder */
+}
+
+.swiper-button-next {
+  right: 20px; /* Position from the right */
+}
+
+.swiper-button-prev {
+  left: 20px; /* Position from the left */
+}
