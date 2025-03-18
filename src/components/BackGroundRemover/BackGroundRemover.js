@@ -12,7 +12,7 @@ import {
   Card,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./BackgroundRemover.module.css";
+import styles from "./BackGroundRemover.module.css";
 import { REMOVER_API_KEY } from "@/utils/constants";
 
 
