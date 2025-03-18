@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import styles from "./Carousel.module.css";
-import Nav from "../Navbar/Navbar";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Carousel = ({data}) => {
@@ -24,7 +24,7 @@ const Carousel = ({data}) => {
 
   return (
     <>
-    <Nav/>    
+    
     <Swiper
         pagination={{ clickable: true }} 
         navigation={true}
