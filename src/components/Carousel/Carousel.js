@@ -1,6 +1,4 @@
 "use client";
-
-import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, Navigation } from "swiper/modules";
@@ -8,10 +6,11 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import styles from "./Carousel.module.css";
+import Image from "next/image"; 
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const Carousel = ({data}) => {
+const Carousel = ({ data }) => {
   const router = useRouter();
 
   const handleButtonClick = (route) => {
@@ -24,18 +23,23 @@ const Carousel = ({data}) => {
 
   return (
     <>
-    
-    <Swiper
-        pagination={{ clickable: true }} 
+      <Swiper
+        pagination={{ clickable: true }}
         navigation={true}
-        autoplay={{ delay: 3000 }} 
-        modules={[Pagination, Autoplay, Navigation]} 
+        autoplay={{ delay: 3000 }}
+        modules={[Pagination, Autoplay, Navigation]}
         className="mySwiper"
-        style={{ height: "100vh" }} 
+        style={{ height: "100vh" }}
       >
         {data.map((item, index) => (
-          <SwiperSlide key={index}  style={{ height: "100vh" }}>
-            <img src={item.src} alt={item.alt} className={styles.carouselImage} />
+          <SwiperSlide key={index} style={{ height: "100vh" }}>
+            <Image
+              src={item.src}
+              alt={item.alt}
+              className={styles.carouselImage}
+              fill 
+              style={{ objectFit: "cover" }} 
+            />
             <div className={styles.content}>
               <h1 className={styles.headline}>{item.headline}</h1>
               <p className={styles.subheadline}>{item.subheadline}</p>
