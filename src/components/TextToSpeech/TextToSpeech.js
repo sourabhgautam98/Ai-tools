@@ -46,7 +46,7 @@ export default function TextToSpeech() {
   return (
     <>
     {/* Main Container */}
-      <div className="text-center py-5 mb-5 bg-light shadow-sm w-100" style={{ margin: 0, paddingLeft: 0, paddingRight: 0 }}>
+      <div className="text-center py-3 mb-3 bg-light shadow-sm w-100" style={{ margin: 0, paddingLeft: 0, paddingRight: 0 }}>
         <div className="container">
           <h1 className="display-3 fw-bold">Text to Speech with high quality</h1>
           <p className="lead text-muted">
@@ -54,13 +54,13 @@ export default function TextToSpeech() {
           </p>
         </div>
       </div>
-      <Container className={styles.container}>
+      <Container className={styles.container1} style={{ height: '60vh' }}>
        
         <Form className={styles.form}>
           <Form.Group controlId="textInput" className="mb-4">
             <Form.Control
               as="textarea"
-              rows={12}
+              rows={10}
               placeholder="Enter the Text..."
               value={text}
               onChange={(e) => setText(e.target.value)}

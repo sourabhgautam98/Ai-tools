@@ -53,15 +53,15 @@ const TextToImage = () => {
   return (
     <>
       {/* Main Container */}
-      <div className="text-center py-5 mb-4 bg-light shadow-sm w-100" style={{ margin: 0, paddingLeft: 0, paddingRight: 0 }}>
+      <div className="text-center py-3 mb-3 bg-light shadow-sm w-100" style={{ margin: 0, paddingLeft: 0, paddingRight: 0 }}>
         <div className="container">
-          <h1 className="display-4 fw-bold">AI Image Generator: Create images from text.</h1>
+          <h1 className="display-3 fw-bold">AI Image: Create images from text.</h1>
           <p className="lead text-muted">
           This is an AI Image Generator. It creates an image from scratch from a text description.
           </p>
         </div>
       </div>
-      <Container className={styles.ColorBackground}>
+      <Container className={`${styles.ColorBackground} mb-3`}>
        
         <InputGroup className="mb-3">
           <FormControl

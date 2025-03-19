@@ -103,7 +103,7 @@ export default function BackgroundRemover() {
 
   return (
     <>
-      <div className="text-center py-5 mb-5 bg-light shadow-sm w-100" style={{ margin: 0, paddingLeft: 0, paddingRight: 0 }}>
+      <div className="text-center py-3 mb-3 bg-light shadow-sm w-100" style={{ margin: 0, paddingLeft: 0, paddingRight: 0 }}>
         <div className="container">
           <h1 className="display-4 fw-bold">Remove Image Backgrounds Instantly</h1>
           <p className="lead text-muted">
@@ -123,7 +123,7 @@ export default function BackgroundRemover() {
           />
         </Form.Group>
 
-        <div className="row justify-content-center">
+        <div className="row justify-content-center mb-5">
           {/* Input Preview Box */}
           <div className="col-md-5 mb-4">
             <Card className="h-100 shadow">

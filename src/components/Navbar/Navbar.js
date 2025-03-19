@@ -34,7 +34,7 @@ function NavbarComponents() {
   return (
     <>
       <style>{styles}</style>
-      <Navbar bg="dark" data-bs-theme="dark" fixed="top">
+      <Navbar bg="dark" data-bs-theme="dark" >
         <Container>
           <Navbar.Brand href="/" className="text-white">
             AI Tools
