@@ -6,8 +6,6 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import styles from "./Carousel.module.css";
-import Image from "next/image"; 
-
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Carousel = ({ data }) => {
@@ -18,7 +16,7 @@ const Carousel = ({ data }) => {
   };
 
   if (!data || data.length === 0) {
-    return <div className={styles.carousel}>No images to display</div>;
+    return <div className={styles.carousel}>No content to display</div>;
   }
 
   return (
@@ -33,13 +31,17 @@ const Carousel = ({ data }) => {
       >
         {data.map((item, index) => (
           <SwiperSlide key={index} style={{ height: "100vh" }}>
-            <Image
-              src={item.src}
-              alt={item.alt}
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
               className={styles.carouselImage}
-              fill 
-              style={{ objectFit: "cover" }} 
-            />
+              style={{ objectFit: "cover", width: "100%", height: "100%" }}
+            >
+              <source src={item.src} type={item.type} />
+              Your browser does not support the video tag.
+            </video>
             <div className={styles.content}>
               <h1 className={styles.headline}>{item.headline}</h1>
               <p className={styles.subheadline}>{item.subheadline}</p>
