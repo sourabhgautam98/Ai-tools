@@ -1,15 +1,11 @@
-import Footer from "@/components/Footer/Footer";
-import NavbarComponents from "@/components/Navbar/Navbar";
-import Alert from "@/components/Alert/Alert";
-
+import "@/styles/globals.css";
+import Navbar from "@/components/Navbar";
 
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <Alert />
-      <NavbarComponents />
+      <Navbar />
       <Component {...pageProps} />
-      <Footer/>
     </>
   );
 }

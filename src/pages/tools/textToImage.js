@@ -1,4 +1,4 @@
-import TextToImage from '@/components/TextToImage/TextToImage'
+import TextToImage from '@/components/TextToImage'
 import React from 'react'
 
 const textToImage = () => {

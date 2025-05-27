@@ -1,4 +1,4 @@
-import TextToSpeech from '@/components/TextToSpeech/TextToSpeech'
+import TextToSpeech from '@/components/TextToSpeech'
 import React from 'react'
 
 const textToSpeech = () => {
