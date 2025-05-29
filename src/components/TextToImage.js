@@ -1,41 +1,86 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import axios from 'axios';
-import { IMAGE_API_KEY } from '@/utils/constants';
+import { useState } from "react";
+import Image from "next/image";
+import { IMAGE_API_KEY } from "@/utils/constants";
 
 export default function TextToImageUI() {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState(null);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleGenerate = async () => {
     if (!text.trim()) return;
     setLoading(true);
-    setError('');
+    setError("");
     setImage(null);
 
-    try {
-      const response = await axios.post(
-        'https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev',
-        { inputs: text },
-        {
-          headers: {
-            Authorization: `Bearer ${IMAGE_API_KEY}`,
-            'Content-Type': 'application/json',
-          },
-          responseType: 'blob',
-        }
-      );
+    // Updated list of working models as of 2024
+    const models = [
+      "black-forest-labs/FLUX.1-schnell",
+      "stabilityai/stable-diffusion-xl-base-1.0",
+      "prompthero/openjourney-v4",
+      "stabilityai/stable-diffusion-2-1",
+    ];
 
-      const imageUrl = URL.createObjectURL(response.data);
-      setImage(imageUrl);
-    } catch (err) {
-      setError(err.message || 'Failed to generate image.');
-    } finally {
-      setLoading(false);
+    for (let i = 0; i < models.length; i++) {
+      try {
+        console.log(`Trying model: ${models[i]}`);
+
+        const response = await fetch(
+          `https://api-inference.huggingface.co/models/${models[i]}`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${IMAGE_API_KEY}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              inputs: text,
+            }),
+          }
+        );
+
+        console.log(`Response status for ${models[i]}:`, response.status);
+
+        if (response.ok) {
+          const blob = await response.blob();
+          console.log("Blob size:", blob.size, "Blob type:", blob.type);
+
+          // Check if the blob contains image data
+          if (blob.size > 1000) {
+            // Image should be larger than 1KB
+            const imageUrl = URL.createObjectURL(blob);
+            setImage(imageUrl);
+            setLoading(false);
+            console.log("Success with model:", models[i]);
+            return; // Success - exit the function
+          }
+        } else {
+          // Log the error response
+          const errorText = await response.text();
+          console.log(`Error response for ${models[i]}:`, errorText);
+        }
+      } catch (err) {
+        console.error(`Network error with model ${models[i]}:`, err);
+      }
+
+      // Add delay between attempts to avoid rate limiting
+      if (i < models.length - 1) {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      }
     }
+
+    // If we get here, all models failed
+    setError(
+      "Unable to generate image. This could be due to:\n" +
+        "• Invalid or missing API key\n" +
+        "• Models are currently unavailable\n" +
+        "• Rate limiting\n" +
+        "Please check your API key and try again later."
+    );
+    setLoading(false);
   };
 
   return (
@@ -45,28 +90,33 @@ export default function TextToImageUI() {
           AI Image: Create images from text.
         </h1>
         <p className="text-lg md:text-xl text-gray-300">
-          This is an AI Image Generator. It creates an image from scratch from a text description.
+          This is an AI Image Generator. It creates an image from scratch from a
+          text description.
         </p>
       </div>
 
-      <div className="flex max-w-xl w-full mx-auto mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] max-w-xl w-full mx-auto gap-2 mb-6">
         <input
           type="text"
           placeholder="Describe your image..."
           value={text}
           onChange={(e) => setText(e.target.value)}
-          className="flex-grow p-4 rounded-l-2xl border border-gray-700 bg-gray-900 text-gray-200
-            focus:outline-none focus:ring-4 focus:ring-purple-600 transition shadow-inner"
+          className="p-4 rounded-2xl border border-gray-700 bg-gray-900 text-gray-200
+      focus:outline-none focus:ring-4 focus:ring-purple-600 transition shadow-inner w-full"
           disabled={loading}
         />
         <button
           onClick={handleGenerate}
           disabled={loading || !text.trim()}
-          className={`bg-purple-600 text-white font-semibold px-6 rounded-r-2xl transition-all duration-300
-            shadow-md
-            ${loading || !text.trim() ? 'opacity-50 cursor-not-allowed' : 'hover:bg-purple-700 cursor-pointer'}`}
+          className={`bg-purple-600 text-white font-semibold px-6 py-4 rounded-2xl transition-all duration-300
+      shadow-md w-full
+      ${
+        loading || !text.trim()
+          ? "opacity-50 cursor-not-allowed"
+          : "hover:bg-purple-700 cursor-pointer"
+      }`}
         >
-          {loading ? 'Generating...' : 'Generate'}
+          {loading ? "Generating..." : "Generate"}
         </button>
       </div>
 
@@ -92,7 +142,9 @@ export default function TextToImageUI() {
               d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
             ></path>
           </svg>
-          <span className="text-lg font-medium">Image Generating, please wait...</span>
+          <span className="text-lg font-medium">
+            Image Generating, please wait...
+          </span>
         </div>
       )}
 
@@ -101,10 +153,13 @@ export default function TextToImageUI() {
       {image && !loading && (
         <div className="text-center max-w-3xl">
           <h3 className="mb-4 text-white font-semibold">Generated Image:</h3>
-          <img
+          <Image
             src={image}
             alt="Generated result"
-            className="mx-auto rounded-lg shadow-lg mb-4 max-w-full h-auto border border-gray-700"
+            width={300}
+            height={300}
+            className="mx-auto rounded-lg shadow-lg mb-4 border border-gray-700"
+            style={{ objectFit: "cover" }}
           />
           <a
             href={image}

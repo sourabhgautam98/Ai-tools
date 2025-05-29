@@ -3,7 +3,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
-
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -12,8 +11,7 @@ const slides = [
     id: 1,
     image: "/carouselImage/one.jpg",
     title: "Text To Speech",
-    subtitle:
-      "Text-to-Speech (TTS) is a technology that converts written text into spoken words.",
+    subtitle:"Text-to-Speech (TTS) is a technology that converts written text into spoken words.",
     buttonText: "Text To Speech",
     route: "tools/textToSpeech",
   },
@@ -21,8 +19,7 @@ const slides = [
     id: 2,
     image: "/carouselImage/two.jpeg",
     title: "Text To Image",
-    subtitle:
-      "Text-to-Image (TTI) is a technology that converts written text descriptions into visual images.",
+    subtitle:"Text-to-Image (TTI) is a technology that converts written text descriptions into visual images.",
     buttonText: "Text To Image",
     route: "tools/textToImage",
   },
@@ -30,8 +27,7 @@ const slides = [
     id: 3,
     image: "/carouselImage/three.jpg",
     title: "Background Removal",
-    subtitle:
-      "Background Removal is a technology that isolates the subject of an image by removing its background.",
+    subtitle:"Background Removal is a technology that isolates the subject of an image by removing its background.",
     buttonText: "Background Removal",
     route: "tools/backGroundRemover",
   },
@@ -43,7 +39,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Image Slider</title>
+        <title>Ai Tools</title>
         <link
           href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Montserrat:wght@300&display=swap"
           rel="stylesheet"
@@ -67,7 +63,8 @@ export default function Home() {
               <div className="absolute inset-0 bg-black/40 pointer-events-none"></div>
 
               <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
-                <h1 className="font-orbitron text-[4rem] font-extrabold mb-4 leading-[1.2] uppercase">
+               <h1 className="font-orbitron text-3xl sm:text-10xl md:text-6xl lg:text-[4rem] font-extrabold mb-4 leading-tight uppercase">
+
                   {slide.title}
                 </h1>
                 <p className="text-xl md:text-2xl font-montserrat mb-6">

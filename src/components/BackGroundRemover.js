@@ -86,10 +86,11 @@ export default function BackgroundRemover() {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-black px-6 py-12">
       <div className="max-w-6xl w-full text-center">
-        <h1 className="text-5xl font-extrabold text-white mb-4 drop-shadow-lg">
+        <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 drop-shadow-lg break-words text-balance">
+
           Background Remover
         </h1>
-        <p className="text-xl text-gray-300 mb-12 max-w-4xl mx-auto">
+        <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-4xl mx-auto">
           Upload your image, remove the background, and download the result instantly using AI-powered Remove.bg API.
         </p>
 
@@ -102,9 +103,9 @@ export default function BackgroundRemover() {
           className="hidden"
         />
 
-        <div className="flex flex-row gap-10 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 w-full">
           {/* Input Box */}
-          <div className="flex flex-col items-center bg-gray-900 rounded-3xl p-8 shadow-xl w-1/2">
+          <div className="flex flex-col items-center bg-gray-900 rounded-3xl p-6 lg:p-8 shadow-xl">
             <p className="mb-6 text-lg font-semibold text-white">Choose Image</p>
 
             <button
@@ -115,7 +116,7 @@ export default function BackgroundRemover() {
             </button>
 
             {inputImage ? (
-              <div className="relative w-full max-h-72" style={{ height: "18rem" }}>
+              <div className="relative w-full h-48 md:h-64 lg:h-72 mb-4">
                 <Image
                   src={inputImage}
                   alt="Input"
@@ -127,7 +128,9 @@ export default function BackgroundRemover() {
                 />
               </div>
             ) : (
-              <p className="text-gray-500">No image selected</p>
+              <div className="w-full h-48 md:h-64 lg:h-72 mb-4 flex items-center justify-center border-2 border-dashed border-gray-600 rounded-lg">
+                <p className="text-gray-500">No image selected</p>
+              </div>
             )}
 
             <button
@@ -139,26 +142,29 @@ export default function BackgroundRemover() {
                   : "bg-purple-600 hover:bg-purple-700 cursor-pointer text-white"}`}
             >
               {loading ? (
-                <svg
-                  className="animate-spin h-6 w-6 mx-auto text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                  ></path>
-                </svg>
+                <div className="flex items-center justify-center space-x-2">
+                  <svg
+                    className="animate-spin h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                    ></path>
+                  </svg>
+                  <span>Processing...</span>
+                </div>
               ) : (
                 "Remove Background"
               )}
@@ -166,14 +172,38 @@ export default function BackgroundRemover() {
           </div>
 
           {/* Output Box */}
-          <div className="flex flex-col items-center bg-gray-900 rounded-3xl p-8 shadow-xl w-1/2">
+          <div className="flex flex-col items-center bg-gray-900 rounded-3xl p-6 lg:p-8 shadow-xl">
             <p className="mb-6 text-lg font-semibold text-white">Output Image</p>
 
             {loading ? (
-              <p className="text-purple-400">Processing image, please wait...</p>
+              <div className="w-full h-48 md:h-64 lg:h-72 mb-4 flex items-center justify-center">
+                <div className="text-center">
+                  <svg
+                    className="animate-spin h-8 w-8 text-purple-400 mx-auto mb-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                    ></path>
+                  </svg>
+                  <p className="text-purple-400">Processing image, please wait...</p>
+                </div>
+              </div>
             ) : outputImage ? (
               <>
-                <div className="relative w-full max-h-72 mb-6" style={{ height: "18rem" }}>
+                <div className="relative w-full h-48 md:h-64 lg:h-72 mb-6">
                   <Image
                     src={outputImage}
                     alt="Output"
@@ -186,17 +216,21 @@ export default function BackgroundRemover() {
                 </div>
                 <button
                   onClick={handleDownload}
-                  className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-8 rounded-3xl shadow-md transition"
+                  className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-3xl shadow-md transition w-full sm:w-auto"
                 >
                   Download Image
                 </button>
               </>
             ) : (
-              <p className="text-gray-500">Processed image will appear here</p>
+              <div className="w-full h-48 md:h-64 lg:h-72 mb-4 flex items-center justify-center border-2 border-dashed border-gray-600 rounded-lg">
+                <p className="text-gray-500">Processed image will appear here</p>
+              </div>
             )}
 
             {error && (
-              <p className="mt-4 text-red-500 font-medium">{error}</p>
+              <div className="mt-4 p-3 bg-red-900/50 border border-red-500 rounded-lg">
+                <p className="text-red-400 font-medium text-sm">{error}</p>
+              </div>
             )}
           </div>
         </div>
